@@ -38,6 +38,7 @@ void CollisionDetection::setVelocitySecond(Velocity v)
 	mVelocitySecond = v;
 }
 
+//the function to find the collision point of the two Point having different velocities
 Point CollisionDetection::findCollisionPoint()
 {
 	double Time = (mPointSecond.X() - mPointFirst.X())/(mVelocityFirst.X()-mVelocitySecond.X());
