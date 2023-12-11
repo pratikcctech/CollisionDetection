@@ -25,7 +25,7 @@ void Visualizer::setupUi() {
     setCentralWidget(mRenderer);
 
 
-
+    //adding the title to output window
     setWindowTitle(QCoreApplication::translate("CollisionDetection", "CollisionDetection", nullptr));
 
 }
