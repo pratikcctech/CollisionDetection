@@ -1,4 +1,6 @@
 #pragma once
+
+//creating the individual class for the Point attribute
 class Point
 {
 
