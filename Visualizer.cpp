@@ -26,6 +26,6 @@ void Visualizer::setupUi() {
 
 
 
-    setWindowTitle(QCoreApplication::translate("SimpleDDA_BresenhamClass", "SimpleDDA_Bresenham", nullptr));
+    setWindowTitle(QCoreApplication::translate("CollisionDetection", "CollisionDetection", nullptr));
 
 }
