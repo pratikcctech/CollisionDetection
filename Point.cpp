@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "Point.h"
 
-//construtors of Point class
+
 Point::Point()
 {
 	mX = 0;
 	mY = 0;
 
 }
-//parameterized constructor of Point class
 Point::Point(double x, double y)
 {
 	mX = x;

@@ -2,6 +2,8 @@
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLBuffer>
+#include "Point.h"
+#include"CollisionDetection.h"
 
 class QOpenGLTexture;
 class QOpenGLShader;
@@ -21,7 +23,7 @@ protected:
     void initializeGL() override;
 
 private:
-    void createGeometry();
+    void createcollison();
     void quad(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4);
     void extrude(qreal x1, qreal y1, qreal x2, qreal y2);
     void reset();
@@ -35,7 +37,7 @@ private:
     QOpenGLShader* mFshader = nullptr;
     QOpenGLShaderProgram* mProgram = nullptr;
 
-    QList<QVector3D> mVertices;
+    QList<Point> mVertices;
     QList<QVector3D> mNormals;
     QOpenGLBuffer mVbo;
     int mVertexAttr;
@@ -47,4 +49,6 @@ private:
     GLint m_posAttr = 0;
     GLint m_colAttr = 0;
     GLint m_matrixUniform = 0;
+public:
+    CollisionDetection c1;
 };

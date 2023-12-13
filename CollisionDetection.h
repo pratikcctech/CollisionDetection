@@ -17,7 +17,8 @@ public:
 	void setVelocitySecond(Velocity v);
 	Point PointFirst();
 	Point PointSecond();
-	Point findCollisionPoint();
+	Point CollisionPoint();
+	void findCollisionPoint();
 
 
 
@@ -25,6 +26,7 @@ private:
 
 	Point mPointFirst;
 	Point mPointSecond;
+	Point mCollisionPoint;
 	Velocity mVelocityFirst;
 	Velocity mVelocitySecond;
 };

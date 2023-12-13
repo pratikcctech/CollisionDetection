@@ -28,6 +28,10 @@ Point CollisionDetection::PointSecond()
 {
 	return mPointSecond;
 }
+Point CollisionDetection::CollisionPoint()
+{
+	return mCollisionPoint;
+}
 
 void CollisionDetection::setVelocityFirst(Velocity v)
 {
@@ -38,15 +42,13 @@ void CollisionDetection::setVelocitySecond(Velocity v)
 	mVelocitySecond = v;
 }
 
-//the function to find the collision point of the two Point having different velocities
-Point CollisionDetection::findCollisionPoint()
+void CollisionDetection::findCollisionPoint()
 {
 	double Time = (mPointSecond.X() - mPointFirst.X())/(mVelocityFirst.X()-mVelocitySecond.X());
 
-	Point CollisionPoint;
+	
 
-	CollisionPoint.setX(mPointFirst.X() + (mVelocityFirst.X() * Time));
-	CollisionPoint.setY(mPointFirst.Y() + (mVelocityFirst.Y() * Time));
+	mCollisionPoint.setX(mPointFirst.X() + (mVelocityFirst.X() * Time));
+	mCollisionPoint.setY(mPointFirst.Y() + (mVelocityFirst.Y() * Time));
 
-	return CollisionPoint;
 }

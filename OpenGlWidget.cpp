@@ -46,21 +46,15 @@ void OpenGLWindow::paintGL()
     QMatrix4x4 matrix;
     matrix.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
     matrix.translate(0, 0, -2);
-
-    CollisionDetection c1;
-    c1.setPointFirst(Point(-0.2, 0.4));
-    c1.setPointSecond(Point(0.5, 0.1));
-    c1.setVelocityFirst(Velocity(0.1, 0.0));
-    c1.setVelocitySecond(Velocity(-0.1, 0.1));
-    Point temp = c1.findCollisionPoint();
+    createcollison();
+    
     mProgram->setUniformValue(m_matrixUniform, matrix);
 
      
     static const GLfloat vertices[] = {
-        c1.PointFirst().X(), c1.PointFirst().Y(),
-       temp.X(),temp.Y(),
-       // 1,1,
-        c1.PointSecond().X(), c1.PointSecond().Y()
+        mVertices[0].X(),mVertices[0].Y(),
+        mVertices[1].X(),mVertices[1].Y(),
+        mVertices[2].X(),mVertices[2].Y()
          
     };
 
@@ -116,13 +110,20 @@ void OpenGLWindow::initializeGL()
 
 }
 
-void OpenGLWindow::createGeometry()
+void OpenGLWindow::createcollison()
 {
     mVertices.clear();
     mNormals.clear();
 
-    mVertices << QVector3D(0.0f, 0.707f, -0.05f);
-    mVertices << QVector3D(-0.5f, -0.5f, -0.05f);
-    mVertices << QVector3D(0.5f, -0.5f, -0.05f);
+    CollisionDetection c1;
+    c1.PointFirst().setY(0);
+    c1.setPointSecond(Point(0.5, 0.4));
+    c1.setVelocityFirst(Velocity(0.1, 0.0));
+    c1.setVelocitySecond(Velocity(-0.1, 0.1));
+    c1.findCollisionPoint();
+
+    mVertices << Point(c1.PointFirst().X(), c1.PointFirst().Y());
+    mVertices << Point(c1.CollisionPoint().X(), c1.CollisionPoint().Y());
+    mVertices << Point(c1.PointSecond().X(), c1.PointSecond().Y());
 
 }

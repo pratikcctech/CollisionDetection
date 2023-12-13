@@ -12,6 +12,7 @@ class Visualizer : public QMainWindow
 public:
     Visualizer(QWindow* parent = nullptr);
     ~Visualizer();
+    void onSpinBoxValueChanged(double value);
 
 private:
     void setupUi();
@@ -22,5 +23,8 @@ private:
     QWidget* mCentralWidget;
     QStatusBar* mStatusBar;
     OpenGLWindow* mRenderer;
+    QDoubleSpinBox* mDoubleSpinBox;
+    double mSpinBoxValue;
+    QLabel* mValueLabel;
 
 };
