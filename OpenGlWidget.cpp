@@ -7,11 +7,11 @@
 #include <QPainter>
 #include"CollisionDetection.h"
 
-OpenGLWindow::OpenGLWindow(const QColor& background, QMainWindow* parent) :
+OpenGLWindow::OpenGLWindow(const QColor& background, QWidget* parent) :
     mBackground(background)
 {
     setParent(parent);
-    setMinimumSize(300, 250);
+    setMinimumSize(500, 250);
 }
 OpenGLWindow::~OpenGLWindow()
 {
@@ -46,35 +46,50 @@ void OpenGLWindow::paintGL()
     QMatrix4x4 matrix;
     matrix.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
     matrix.translate(0, 0, -2);
-    createcollison();
     
     mProgram->setUniformValue(m_matrixUniform, matrix);
 
      
-    static const GLfloat vertices[] = {
-        mVertices[0].X(),mVertices[0].Y(),
-        mVertices[1].X(),mVertices[1].Y(),
-        mVertices[2].X(),mVertices[2].Y()
-         
-    };
+    std::vector<float> vertices;
+    std::vector<float> colors;
 
-    static const GLfloat colors[] = {
-        1.0f ,1.0f,1.0f,
-        1.0f ,1.0f,1.0f,
-        1.0f ,1.0f,1.0f,
-    };
+    //verticesData = mVertices.data();
+    //colorsData = mColors.data();
+
+
+    for (int i = 0; i < mVertices.size()-1; i++) {
+        vertices.push_back(mVertices[i].X());
+        vertices.push_back(mVertices[i].Y());
+        vertices.push_back(mVertices[i+1].X());
+        vertices.push_back(mVertices[i+1].Y());
+        colors.push_back(1.0f);
+        colors.push_back(1.0f);
+        colors.push_back(1.0f); 
+        colors.push_back(1.0f);
+        colors.push_back(1.0f);
+        colors.push_back(1.0f);
+        
+    }
+
+  //  createcollison();
     
 
-    glVertexAttribPointer(m_posAttr, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, colors);
+
+
+    
+
+    glVertexAttribPointer(m_posAttr, 2, GL_FLOAT, GL_FALSE, 0, vertices.data());
+    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, colors.data());
 
     glEnableVertexAttribArray(m_posAttr);
     glEnableVertexAttribArray(m_colAttr);
 
-    glDrawArrays(GL_LINE_STRIP, 0, 3);
+    glDrawArrays(GL_LINE_STRIP, 0, vertices.size()/2);
 
     glDisableVertexAttribArray(m_colAttr);
     glDisableVertexAttribArray(m_posAttr);
+
+
 }
 
 void OpenGLWindow::initializeGL()
@@ -110,20 +125,26 @@ void OpenGLWindow::initializeGL()
 
 }
 
-void OpenGLWindow::createcollison()
+void OpenGLWindow::createcollison(double x1, double y1, double x2, double y2, double vx1, double vy1, double vx2, double vy2)
 {
     mVertices.clear();
     mNormals.clear();
 
+
     CollisionDetection c1;
-    c1.PointFirst().setY(0);
-    c1.setPointSecond(Point(0.5, 0.4));
-    c1.setVelocityFirst(Velocity(0.1, 0.0));
-    c1.setVelocitySecond(Velocity(-0.1, 0.1));
+    c1.setPointFirst(Point(x1,y1));
+    c1.setPointSecond(Point(x2,y2));
+    c1.setVelocityFirst(Velocity(vx1,vy1));
+    c1.setVelocitySecond(Velocity(vx2,vy2));
     c1.findCollisionPoint();
 
     mVertices << Point(c1.PointFirst().X(), c1.PointFirst().Y());
     mVertices << Point(c1.CollisionPoint().X(), c1.CollisionPoint().Y());
     mVertices << Point(c1.PointSecond().X(), c1.PointSecond().Y());
+    emit dataUpdate();
+}
 
+void OpenGLWindow::addLines(double x1, double y1, double x2, double y2, double vx1, double vy1, double vx2, double vy2)
+{
+    //mVertices.push_back()
 }
