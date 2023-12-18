@@ -42,6 +42,8 @@ void CollisionDetection::setVelocitySecond(Velocity v)
 	mVelocitySecond = v;
 }
 
+
+//finding the collision point of two Points and storing it into the member variable
 void CollisionDetection::findCollisionPoint()
 {
 	double Time = (mPointSecond.X() - mPointFirst.X())/(mVelocityFirst.X()-mVelocitySecond.X());
