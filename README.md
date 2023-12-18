@@ -15,3 +15,16 @@ OpenGL
  
 #### Include the necessary headers (OpenGLWindow.h, CollisionDetection.h, etc.) in your project.
 #### Initialize the OpenGL window and use the provided functionalities (drawing shapes, applying algorithms).
+
+# code implemented
+
+```void CollisionDetection::findCollisionPoint()
+{
+	double Time = (mPointSecond.X() - mPointFirst.X())/(mVelocityFirst.X()-mVelocitySecond.X());
+
+	
+
+	mCollisionPoint.setX(mPointFirst.X() + (mVelocityFirst.X() * Time));
+	mCollisionPoint.setY(mPointFirst.Y() + (mVelocityFirst.Y() * Time));
+
+}
