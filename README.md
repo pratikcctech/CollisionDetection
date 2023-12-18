@@ -18,7 +18,8 @@ OpenGL
 
 # code implemented
 
-```void CollisionDetection::findCollisionPoint()
+```
+void CollisionDetection::findCollisionPoint()
 {
 	double Time = (mPointSecond.X() - mPointFirst.X())/(mVelocityFirst.X()-mVelocitySecond.X());
 
