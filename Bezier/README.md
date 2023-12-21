@@ -1,7 +1,3 @@
-Certainly! Here's a simple and short README for your Bezier curve implementation:
-
----
-
 # Bezier Curve Drawing
 
 This project provides a basic implementation of the Bezier curve algorithm in C++. The code includes a `Bezier` class with a constructor and a function to draw the Bezier curve.
@@ -61,6 +57,6 @@ myBezier.drawCurve(p0, p1, p2, p3, vertices, colors);
 // Use 'vertices' and 'colors' for further processing or rendering.
 ```
 
-Feel free to explore and modify the code for your specific use case.
+## Snapshots
+![image](https://github.com/pratikcctech/CollisionDetection/assets/149318512/c04ebe95-e4e3-4fa2-80e0-b78b86d83105)
 
----
